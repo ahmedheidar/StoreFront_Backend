@@ -9,7 +9,7 @@ var app = (0, express_1["default"])();
 var address = "0.0.0.0:3000";
 app.use(body_parser_1["default"].json());
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.send('Hello World BRUHHH!');
 });
 app.listen(3000, function () {
     console.log("starting app on: ".concat(address));
