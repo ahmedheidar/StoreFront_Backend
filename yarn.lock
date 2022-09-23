@@ -622,10 +622,10 @@
   "resolved" "https://registry.npmjs.org/jasmine-core/-/jasmine-core-4.4.0.tgz"
   "version" "4.4.0"
 
-"jasmine-spec-reporter@^6.0.0":
-  "integrity" "sha512-MvTOVoMxDZAftQYBApIlSfKnGMzi9cj351nXeqtnZTuXffPlbONN31+Es7F+Ke4okUeQ2xISukt4U1npfzLVrQ=="
-  "resolved" "https://registry.npmjs.org/jasmine-spec-reporter/-/jasmine-spec-reporter-6.0.0.tgz"
-  "version" "6.0.0"
+"jasmine-spec-reporter@^7.0.0":
+  "integrity" "sha512-OtC7JRasiTcjsaCBPtMO0Tl8glCejM4J4/dNuOJdA8lBjz4PmWjYQ6pzb0uzpBNAWJMDudYuj9OdXJWqM2QTJg=="
+  "resolved" "https://registry.npmjs.org/jasmine-spec-reporter/-/jasmine-spec-reporter-7.0.0.tgz"
+  "version" "7.0.0"
   dependencies:
     "colors" "1.4.0"
 
@@ -636,7 +636,7 @@
   dependencies:
     "yargs" "^16.2.0"
 
-"jasmine@^4.4.0", "jasmine@>=3.4":
+"jasmine@^4.3.0", "jasmine@>=3.4":
   "integrity" "sha512-xrbOyYkkCvgduNw7CKktDtNb+BwwBv/zvQeHpTkbxqQ37AJL5V4sY3jHoMIJPP/hTc3QxLVwOyxc87AqA+kw5g=="
   "resolved" "https://registry.npmjs.org/jasmine/-/jasmine-4.4.0.tgz"
   "version" "4.4.0"

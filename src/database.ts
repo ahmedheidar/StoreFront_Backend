@@ -13,7 +13,7 @@ const {
 } = process.env;
 
 let client;
-console.log(ENV);
+console.log(ENV+"ASFSFASCDCASXASCASCAS");
 
 if (ENV === "dev") {
   client = new Pool({
