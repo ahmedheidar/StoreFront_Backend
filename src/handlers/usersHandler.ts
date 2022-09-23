@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { User, UserStore } from "../models/users";
+import jwt from 'jsonwebtoken'
 
 const store = new UserStore();
 
@@ -15,14 +16,15 @@ const show = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+  const user: User = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    password:req.body.password
+  }
   try {
-    const user: User = {
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      password:req.body.password
-    };
 
     const newuser = await store.create(user);
+    
     res.json(newuser);
   } catch (err) {
     res.status(400);

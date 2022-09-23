@@ -1,4 +1,5 @@
 import Client from "../database";
+import bcrypt from "bcrypt";
 
 export type User = {
   id?: Number;
@@ -6,6 +7,9 @@ export type User = {
   last_name: String;
   password: String;
 };
+
+const pepper = process.env.BCRYPT_PASSWORD as any;
+const saltRounds = process.env.SALT_ROUNDS as any;
 
 export class UserStore {
   async index(): Promise<User[]> {
@@ -38,8 +42,9 @@ export class UserStore {
       const sql =
         "INSERT INTO Users (first_name, last_name, password) VALUES($1, $2, $3) RETURNING *";
       const conn = await Client.connect();
+      const hash = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds));
 
-      const result = await conn.query(sql, [u.first_name, u.last_name, u.password]);
+      const result = await conn.query(sql, [u.first_name, u.last_name, hash]);
 
       const User = result.rows[0];
 
@@ -48,24 +53,6 @@ export class UserStore {
       return User;
     } catch (err) {
       throw new Error(`Could not add new User ${u.first_name}. Error: ${err}`);
-    }
-  }
-
-  async delete(id: number): Promise<User> {
-    try {
-      const sql = "DELETE FROM Users WHERE id=($1)";
-
-      const conn = await Client.connect();
-
-      const result = await conn.query(sql, [id]);
-
-      const User = result.rows[0];
-
-      conn.release();
-
-      return User;
-    } catch (err) {
-      throw new Error(`Could not delete User ${id}. Error: ${err}`);
     }
   }
 }
