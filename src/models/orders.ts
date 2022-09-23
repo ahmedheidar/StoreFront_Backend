@@ -7,64 +7,31 @@ export type Order = {
 };
 
 export class OrderStore {
-  async index(): Promise<Order[]> {
+  async currentOrder(userid: Number): Promise<Order[]> {
     try {
       const conn = await Client.connect();
-      const sql = "Select * from orders";
-      const result = await conn.query(sql);
+      const sql = "SELECT * FROM Orders O inner join order_product OP on O.id=OP.order_id inner join product P on P.id=OP.product_id WHERE user_id=($1) AND order_status=($2)";
+      const result = await conn.query(sql, [userid,'not complete']);
       conn.release();
       return result.rows;
     } catch (err) {
-      throw new Error("Cannot get Orders " + err);
+      throw new Error(`Cannot get Orders for userid ${userid} ` + err);
     }
   }
 
-  async show(id: Number): Promise<Order> {
+  async completedOrders(userid: Number): Promise<Order> {
     try {
-      const sql = "SELECT * FROM Orders WHERE id=($1)";
+      const sql =
+        "SELECT * FROM Orders O inner join order_product OP on O.id=OP.order_id inner join product P on P.id=OP.product_id WHERE user_id=($1) AND order_status=($2)";
       const conn = await Client.connect();
-      const result = await conn.query(sql, [id]);
+      const result = await conn.query(sql, [userid, "completed"]);
       conn.release();
 
       return result.rows[0];
     } catch (err) {
-      throw new Error(`Could not find Order ${id}. Error: ${err}`);
-    }
-  }
-
-  async create(o: Order): Promise<Order> {
-    try {
-      const sql =
-        "INSERT INTO Orders (order_status, user_id) VALUES($1, $2) RETURNING *";
-      const conn = await Client.connect();
-
-      const result = await conn.query(sql, [o.order_status,o.user_id]);
-
-      const Order = result.rows[0];
-
-      conn.release();
-
-      return Order;
-    } catch (err) {
-      throw new Error(`Could not add new Order ${o.id}. Error: ${err}`);
-    }
-  }
-
-  async delete(id: number): Promise<Order> {
-    try {
-      const sql = "DELETE FROM Orders WHERE id=($1)";
-
-      const conn = await Client.connect();
-
-      const result = await conn.query(sql, [id]);
-
-      const Order = result.rows[0];
-
-      conn.release();
-
-      return Order;
-    } catch (err) {
-      throw new Error(`Could not delete Order ${id}. Error: ${err}`);
+      throw new Error(
+        `Could not find comlpeted Orders of user ${userid}. Error: ${err}`
+      );
     }
   }
 }

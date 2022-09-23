@@ -5,11 +5,10 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- An INDEX route: '/products' [GET]
+- A SHOW route: '/products/:id' [GET]
+- A CREATE route: '/products' [POST]
+- Get products by category route: 'products/category/:category' [GET]
 
 #### Users
 - Index [token required]
