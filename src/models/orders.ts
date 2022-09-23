@@ -3,7 +3,7 @@ import Client from "../database";
 export type Order = {
   id: Number;
   order_status: String;
-  user_id: String;
+  user_id: Number;
 };
 
 export class OrderStore {
