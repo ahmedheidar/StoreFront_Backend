@@ -7,17 +7,18 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Products
 - An INDEX route: '/products' [GET]
 - A SHOW route: '/products/:id' [GET]
-- A CREATE route: '/products' [POST]
+- A CREATE route: '/products' [POST][TOKEN REQUIRED]
 - Get products by category route: 'products/category/:category' [GET]
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- An INDEX route: '/users' [GET][TOKEN REQUIRED]
+- A SHOW route: '/users/:id' [GET][TOKEN REQUIRED]
+- A CREATE route: '/users' [POST][TOKEN REQUIRED]
+
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Current Order by user: '/orders/current/:userid' [GET][TOKEN REQUIRED]
+- Completed Orders by user: '/orders/completed/:userid' [GET][TOKEN REQUIRED]
 
 ## Relational Schema
 #### Product

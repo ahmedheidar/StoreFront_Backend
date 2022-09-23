@@ -1,7 +1,20 @@
 import express, { Request, Response } from "express";
 import { Product, ProductStore } from "../models/products";
+import jwt from 'jsonwebtoken'
 
 const store = new ProductStore();
+
+const verifyAuthToken = (req: Request, res: Response, next:any) => {
+  try {
+      const authorizationHeader = req.headers.authorization as String
+      const token = authorizationHeader.split(' ')[1]
+      const decoded = jwt.verify(token, process.env.TOKEN_SECRET as any)
+
+      next()
+  } catch (error) {
+      res.status(401)
+  }
+}
 
 const index = async (_req: Request, res: Response) => {
   const products = await store.index();
@@ -43,8 +56,8 @@ const productsByCategory = async (req: Request, res: Response) => {
 const productRoutes = (app: express.Application) => {
   app.get("/products", index);
   app.get("/products/:id", show);
-  app.post("/products", create);
-  app.delete("/products", destroy);
+  app.post("/products", verifyAuthToken, create);
+  app.delete("/products", verifyAuthToken, destroy);
   app.get("/products/category/:category", productsByCategory);
 };
 
