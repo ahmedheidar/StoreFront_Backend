@@ -38,13 +38,8 @@ class UserStore {
             const sql = "INSERT INTO Users (first_name, last_name, password) VALUES($1, $2, $3) RETURNING *";
             const conn = await database_1.default.connect();
             const hash = bcrypt_1.default.hashSync(u.password + pepper, parseInt(saltRounds));
-            const result = await conn.query(sql, [
-                u.first_name,
-                u.last_name,
-                hash,
-            ]);
+            const result = await conn.query(sql, [u.first_name, u.last_name, hash]);
             const User = result.rows[0];
-            console.log(bcrypt_1.default.compareSync(u.password + pepper, User.password));
             conn.release();
             return User;
         }
