@@ -20,23 +20,16 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Current Order by user (args: user id)[token required]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
-## Data Shapes
+## Relational Schema
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+product(id:serial primary key, name:varchar not null, price:integer not null, category:varchar)
+
 
 #### User
-- id
-- firstName
-- lastName
-- password
+product(id:serial primary key, first_name:varchar not null, last_name: varchar not null, password:varchar)
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+orders(id:serial primary key, order_status:VARCHAR, user_id:bigint REFERENCES users(id))
+
+order-product(id:SERIAL PRIMARY KEY, quantity:integer NOT NULL, order_id: bigint REFERENCES order(id), product_id bigint REFERENCES product(id))
 
