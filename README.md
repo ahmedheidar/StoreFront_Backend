@@ -4,11 +4,16 @@
 
 This is a simple project that was required in my advanced web-development track course of UDACITY.
 
-### Instructions:
+## Instructions:
 
-**To Run the server**: npm start
+**To install all the packages**: Type "npm install" ot "yarn" in the terminal. 
 
-**To Run Unit Tests**: npm test
+**To Setup Database**: Create a ".env" file and to it your all the database variables you will need in the "database.json" file. 
+                       The database is running on por "5432".
+
+**To Run the server**: Type "npm start" in the terminal at the root directory. The server is running on port "3000"
+
+**To Run Unit Tests**: Type "npm test" in the terminal at the root directory.
 
 
   
@@ -26,3 +31,5 @@ TOKEN_SECRET=fuckinsecrettoken
 
 
 **NOTE** ENDPOINT documentation and RELATIONAL SCHEMA is written in the REQUIREMENTS.md
+
+**NOTE** To run the your test database set the environment variable "ENV" in the ".env" file to "test". Else set it to "dev".
