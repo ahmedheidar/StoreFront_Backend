@@ -9,10 +9,10 @@ describe("Product Model", () => {
     it('should have a show method', () => {
         expect(store.show).toBeDefined();
     });
-    it('should have a show method', () => {
+    it('should have a create method', () => {
         expect(store.create).toBeDefined();
     });
-    it('should have a show method', () => {
+    it('should have a delete method', () => {
         expect(store.delete).toBeDefined();
     });
 });
